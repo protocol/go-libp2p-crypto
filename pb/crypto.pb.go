@@ -197,110 +197,6 @@ var fileDescriptor_527278fb02d03321 = []byte{
 	0x00, 0xff, 0xff, 0x13, 0xbe, 0xd4, 0xff, 0x19, 0x01, 0x00, 0x00,
 }
 
-func (m *PublicKey) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PublicKey) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x8
-	i++
-	i = encodeVarintCrypto(dAtA, i, uint64(m.Type))
-	if m.Data != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintCrypto(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
-	return i, nil
-}
-
-func (m *PrivateKey) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PrivateKey) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x8
-	i++
-	i = encodeVarintCrypto(dAtA, i, uint64(m.Type))
-	if m.Data != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintCrypto(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
-	return i, nil
-}
-
-func encodeVarintCrypto(dAtA []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return offset + 1
-}
-func (m *PublicKey) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovCrypto(uint64(m.Type))
-	if m.Data != nil {
-		l = len(m.Data)
-		n += 1 + l + sovCrypto(uint64(l))
-	}
-	return n
-}
-
-func (m *PrivateKey) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovCrypto(uint64(m.Type))
-	if m.Data != nil {
-		l = len(m.Data)
-		n += 1 + l + sovCrypto(uint64(l))
-	}
-	return n
-}
-
-func sovCrypto(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozCrypto(x uint64) (n int) {
-	return sovCrypto(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
 func (m *PublicKey) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -641,3 +537,108 @@ var (
 	ErrInvalidLengthCrypto = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowCrypto   = fmt.Errorf("proto: integer overflow")
 )
+
+func (m *PublicKey) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PublicKey) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x8
+	i++
+	i = encodeVarintCrypto(dAtA, i, uint64(m.Type))
+	if m.Data != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintCrypto(dAtA, i, uint64(len(m.Data)))
+		i += copy(dAtA[i:], m.Data)
+	}
+	return i, nil
+}
+
+func (m *PrivateKey) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PrivateKey) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x8
+	i++
+	i = encodeVarintCrypto(dAtA, i, uint64(m.Type))
+	if m.Data != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintCrypto(dAtA, i, uint64(len(m.Data)))
+		i += copy(dAtA[i:], m.Data)
+	}
+	return i, nil
+}
+
+func encodeVarintCrypto(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
+func (m *PublicKey) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 1 + sovCrypto(uint64(m.Type))
+	if m.Data != nil {
+		l = len(m.Data)
+		n += 1 + l + sovCrypto(uint64(l))
+	}
+	return n
+}
+
+func (m *PrivateKey) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 1 + sovCrypto(uint64(m.Type))
+	if m.Data != nil {
+		l = len(m.Data)
+		n += 1 + l + sovCrypto(uint64(l))
+	}
+	return n
+}
+
+func sovCrypto(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozCrypto(x uint64) (n int) {
+	return sovCrypto(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
